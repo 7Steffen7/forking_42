@@ -60,7 +60,7 @@ struct file_content   read_entire_file(char* filename)
 
 void print_message(u8 *pixel_data, int message_len, int y, int start_x, int end_x, u32 row_size) {
 
-	// int nbr_of_lines = message_len / (end_x * 4 - start_x * 4);
+	int nbr_of_lines = message_len / (end_x * 4 - start_x * 4);
 
 	while (message_len)
 	{
@@ -132,7 +132,7 @@ int main(int argc, char** argv)
 				message_len = blue + red;
 				print_message(pixel_data, message_len, y -= 2 , found_header + 2, x, row_size);
 
-				// printf("signature: %.2s\nfile_size: %u\ndata_offset: %u\ninfo_header_size: %u\nwidth: %u\nheight: %u\nplanes: %i\nbit_per_px: %i\ncompression_type: %u\ncompression_size: %u\n", header->signature, header->file_size, header->data_offset, header->info_header_size, header->width, header->height, header->number_of_planes, header->bit_per_pixel, header->compression_type, header->compressed_image_size);
+				printf("signature: %.2s\nfile_size: %u\ndata_offset: %u\ninfo_header_size: %u\nwidth: %u\nheight: %u\nplanes: %i\nbit_per_px: %i\ncompression_type: %u\ncompression_size: %u\n", header->signature, header->file_size, header->data_offset, header->info_header_size, header->width, header->height, header->number_of_planes, header->bit_per_pixel, header->compression_type, header->compressed_image_size);
 				munmap(file_content.data, file_content.size);
 				return(0);
 			}
