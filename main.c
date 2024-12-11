@@ -57,9 +57,10 @@ struct file_content   read_entire_file(char* filename)
 }
 
 void print_message(u8 *pixel_data, int message_len, int y, int start_x, int end_x, u32 row_size) {
-	printf("start to end %d - %d\n", start_x * 4, end_x * 4);
+	// printf("message len: %d\n", message_len);
+	// printf("start to end %d - %d\n", start_x * 4, end_x * 4);
 	int nbr_of_lines = message_len / (end_x * 4 - start_x * 4);
-	printf("nbr_of_lines: %d\n", nbr_of_lines);
+	// printf("nbr_of_lines: %d\n", nbr_of_lines);
 
 	while (message_len)
 	{
@@ -81,7 +82,6 @@ void print_message(u8 *pixel_data, int message_len, int y, int start_x, int end_
 				message_len--;
 			}
 			// message_len--;
-
 			x++;
 		}
 		y--;
@@ -128,16 +128,16 @@ int main(int argc, char** argv)
 			}
 
 			if (blue == 127 &&  green == 188 && red == 217 && found_header == 0) {
-				printf("Pixel (%u,%u): B=%u, G=%u, R=%u\n", y, x, blue, green, red);
+				// printf("Pixel (%u,%u): B=%u, G=%u, R=%u\n", y, x, blue, green, red);
 				found_header = x;
 			}
 			else if (blue == 127 &&  green == 188 && red == 217 && x > found_header) {
-				printf("Pixel (%u,%u): B=%u, G=%u, R=%u\n", y, x, blue, green, red);
+				// printf("Pixel (%u,%u): B=%u, G=%u, R=%u\n", y, x, blue, green, red);
 				header_line = 1;
 			} else if (!(blue == 127 &&  green == 188 && red) && header_line == 1 ) {
 				message_len = blue + red;
-				printf("Pixel (%u,%u): B=%u, G=%u, R=%u\n", y, x, blue, green, red);
-				printf("message_len: %d\n", message_len);
+				// printf("Pixel (%u,%u): B=%u, G=%u, R=%u\n", y, x, blue, green, red);
+				// printf("message_len: %d\n", message_len);
 				print_message(pixel_data, message_len, y -= 2 , found_header + 2, x, row_size);
 				return(0);
 				// header_line = 2;
